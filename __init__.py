@@ -1,5 +1,5 @@
 from geopy.geocoders import Nominatim
-
+from get_batch import generate_batch
 import pandas as pd
 import time
 import numpy as np
@@ -15,7 +15,9 @@ biz_names = ['BJs Wholesale Club',
              'Walmart',
              'Target']
 
+result = generate_batch(name='Lowe\'s', batch_size=10)
 
+result.to_csv('output.csv')
 
 
 '''

@@ -1,32 +1,30 @@
 from geopy.geocoders import Nominatim
 import pandas as pd
 
+
 def generate_batch(name='', batch_size=1, testing=False):
     geo_locator = Nominatim(user_agent='Phase_App')
 
     batch = geo_locator.geocode(name, exactly_one=testing, limit=batch_size, addressdetails=True)
     block = []
+    coords = []
 
     for line in batch:
         item_cat = line.raw['type']
         adress_data = line.raw['address']
-        coord_data = (line.raw['lat'],line.raw['lon'])
-        #adress_data['name'] = adress_data.pop(item_cat)
+        adress_data['name'] = adress_data.pop(item_cat)
+        coord_data = {'lat/lon': [line.raw['lat'], line.raw['lon']]}
 
         block.append(adress_data)
+        coords.append(coord_data)
 
-    frame = pd.DataFrame.from_records(block, index=None)
+    address_frame = pd.DataFrame.from_records(block, index=None)
+    coord_frame = pd.DataFrame.from_records(coords)
 
-    return frame
+    result_frame = address_frame.join(coord_frame)
 
+    result_frame = result_frame.fillna('NaN')
 
+    return result_frame
 
-#df = pd.DataFrame.from_records(block,index=None)
-
-result = generate_batch(name='Lowe\'s', batch_size=3)
-
-result.to_csv('output.csv')
-
-
-
-
+# df = pd.DataFrame.from_records(block,index=None)
