@@ -1,23 +1,25 @@
-from geopy.geocoders import Nominatim
-from get_batch import generate_batch
+from func import generate_batch, load_biznames
 import pandas as pd
 import time
 import numpy as np
 
+biz_names = load_biznames()
+batch_run = 3
+
+for biz in biz_names:
+    repeat_counter = 0
+    data_sink = pd.DataFrame()
+
+    while repeat_counter < 25:
+        current_df = generate_batch(name=biz, batch_size=batch_run)
+
+        data_sink.join(current_df)
 
 
-biz_names = ['BJs Wholesale Club',
-             'Sam\'s club',
-             'Costco',
-             'Lowe\'s',
-             'Home Depot',
-             'Menards',
-             'Walmart',
-             'Target']
 
-result = generate_batch(name='Lowe\'s', batch_size=10)
 
-result.to_csv('output.csv')
+
+
 
 
 '''

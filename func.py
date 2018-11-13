@@ -27,4 +27,12 @@ def generate_batch(name='', batch_size=1, testing=False):
 
     return result_frame
 
+
+def load_biznames():
+
+    with open('Business_Names.txt', encoding='utf-8') as file:
+        biz_names = [line.strip() for line in file]
+
+    return biz_names
+
 # df = pd.DataFrame.from_records(block,index=None)
