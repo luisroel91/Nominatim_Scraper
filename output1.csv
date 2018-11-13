@@ -1,0 +1,14 @@
+,0
+place_id,134797704
+licence,"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright"
+osm_type,way
+osm_id,248841433
+boundingbox,"['40.5918938', '40.5932112', '-73.9984415', '-73.9960985']"
+lat,40.5924953
+lon,-73.9972694816547
+display_name,"BJ's Wholesale Club, 1752, Shore Parkway, Bath Beach, Kings County, NYC, New York, 11214, USA"
+class,shop
+type,supermarket
+importance,0.5202332630193249
+icon,https://nominatim.openstreetmap.org/images/mapicons/shopping_supermarket.p.20.png
+address,"{'supermarket': ""BJ's Wholesale Club"", 'house_number': '1752', 'road': 'Shore Parkway', 'neighbourhood': 'Bath Beach', 'county': 'Kings County', 'city': 'NYC', 'state': 'New York', 'postcode': '11214', 'country': 'USA', 'country_code': 'us'}"
