@@ -11,29 +11,26 @@ def generate_batch(name='', batch_size=1, testing=False):
     coords = []
 
     for line in batch:
-        raw_data = line.raw
+        line_data = line.raw
+        line_coord = {'lat/lon': [line_data['lat'], line_data['lon']]}
 
+        address_data = line_data['address']
+        address_headers = list(line_data['address'].keys())
 
-
-
-        line_cat = raw_data['type']
-        coord_data = {'lat/lon': [raw_data['lat'], raw_data['lon']]}
-
-        address_data = raw_data[re.sub('/address/', 'address')]
-
-
-        address_data['name'] = address_data.pop(re.search('/line_cat/', line_cat))
+        try:
+            address_data['name'] = address_data.pop(address_headers[0])
+        except KeyError:
+            print("error")
 
         block.append(address_data)
-        coords.append(coord_data)
+        coords.append(line_coord)
 
-
+        print(line_data)
 
     address_frame = pd.DataFrame.from_records(block, index=None)
     coord_frame = pd.DataFrame.from_records(coords)
 
     result_frame = address_frame.join(coord_frame)
-
     result_frame = result_frame.fillna('NaN')
 
     return result_frame
