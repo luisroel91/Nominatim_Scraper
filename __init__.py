@@ -4,7 +4,7 @@ import time
 import numpy as np
 
 biz_names = load_biznames()
-batch_run = 3
+batch_run = 500
 
 counter = 0
 
@@ -19,5 +19,5 @@ while counter < batch_run:
         counter += 1
         # repeat_counter = sink.duplicated().size
 
-
+    data_sink = data_sink.fillna('NaN')
     data_sink.to_csv('output.csv')

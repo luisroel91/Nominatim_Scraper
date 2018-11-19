@@ -1,12 +1,12 @@
 from geopy.geocoders import Nominatim
 import pandas as pd
-import re
+import time
 
 
 def generate_batch(name='', batch_size=1, testing=False):
     geo_locator = Nominatim(user_agent='Phase_App')
-
     batch = geo_locator.geocode(name, exactly_one=testing, limit=batch_size, addressdetails=True)
+
     block = []
     coords = []
 
@@ -32,6 +32,8 @@ def generate_batch(name='', batch_size=1, testing=False):
 
     result_frame = address_frame.join(coord_frame)
     result_frame = result_frame.fillna('NaN')
+
+    time.sleep(20)
 
     return result_frame
 
